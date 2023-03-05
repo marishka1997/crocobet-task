@@ -1,1 +1,12 @@
-<p>user-list works!</p>
+<div class="bg-primary-subtle">
+  <div class="container bg-white rounded mt-3">
+  <h2 class="d-flex justify-content-center pt-3" style="letter-spacing: 10px">Users</h2>
+  <div class=" row row-cols-md-3 d-flex justify-content-center py-2">
+    <ng-container *ngIf="users">
+        <ng-container *ngFor="let user of users">
+            <button class="btn btn-outline-success m-2 border-2" [routerLink]="[ '/user-info', user?.id]">{{user.name}}</button>
+        </ng-container>
+    </ng-container>
+  </div>
+  </div>
+  </div>
