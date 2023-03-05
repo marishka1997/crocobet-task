@@ -1,1 +1,73 @@
-<p>user-info works!</p>
+<ng-container *ngIf="user">
+  <div class="bg-light">
+    <div class="container bg-white rounded mt-3" >
+      <button  type="button" class="btn bt mt-2" (click)="back()"><i class="fa fa-chevron-circle-left"></i>Back</button>
+      <button type="button" style="float: right;" class="btn bt mt-2" [routerLink]="[ '/user-info', user?.id, 'posts']">Posts</button><br><br>
+    <h2 class=" d-flex justify-content-center pt-3" style="letter-spacing: 10px;">User Information</h2>
+    <div class=" row d-flex justify-content-center py-2">
+      <ng-container>
+           <table class="table table-borderless table-hover" style="width: 50%;">
+            <thead class="table-dark">
+              <tr>
+                <th class="table-dark" scope="col"> </th>
+                <th scope="col">Personal Info</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th  scope="row">Name</th>
+                <td>{{user.name}}</td>
+
+              </tr>
+              <tr>
+                <th scope="row">Username</th>
+                <td>{{user.username}}</td>
+
+              </tr>
+              <tr>
+                <th scope="row">Email</th>
+                <td colspan="2">{{user.email}}</td>
+
+              </tr>
+              <tr>
+                <th scope="row">Phone</th>
+                <td colspan="2">{{user.phone}}</td>
+
+              </tr> <tr>
+                <th scope="row">Company</th>
+                <td colspan="2">{{user.company.name}}</td>
+
+              </tr>
+              <tr>
+                <th scope="row">Catchphrase</th>
+                <td colspan="2">{{user.company.catchPhrase}}</td>
+
+              </tr>
+              <tr>
+                <th scope="row">City</th>
+                <td colspan="2">{{user.address.city}}</td>
+
+              </tr>
+              <tr>
+                <th scope="row">Street</th>
+                <td colspan="2">{{user.address.street}}</td>
+
+              </tr>
+              <tr>
+                <th scope="row">Suite</th>
+                <td colspan="2">{{user.address.suite}}</td>
+
+              </tr>
+              <tr>
+                <th scope="row">Website</th>
+                <td colspan="2">{{user.website}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+    </div>
+    </div>
+    </div>
+</ng-container>
+
