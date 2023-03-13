@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-
+import { User } from 'src/app/services/models/user.model';
 import { Observable, Subscription } from 'rxjs';
 @Component({
   selector: 'app-user-list',
@@ -8,7 +8,7 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnDestroy {
-  users: any;
+  users: User[] = [];
   subscription!: Subscription;
 
   constructor(private apiService: ApiService) {}
@@ -16,7 +16,7 @@ export class UserListComponent implements OnDestroy {
   ngOnInit() {
     this.subscription = this.apiService
       .getUsers()
-      .subscribe((users) => (this.users = users));
+      .subscribe((users: User[]) => (this.users = users));
   }
 
   ngOnDestroy() {

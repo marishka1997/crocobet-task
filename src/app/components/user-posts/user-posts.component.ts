@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs';
-
+import { Post } from 'src/app/services/models/posts.model';
+import { User } from 'src/app/services/models/user.model';
 
 @Component({
   selector: 'app-user-posts',
@@ -10,29 +11,35 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./user-posts.component.scss']
 })
 export class UserPostsComponent implements OnInit, OnDestroy {
-  userId:any
-  posts:any
-  users:any
-  id:any
+  userId: any;
+  posts: Post[] = [];
+  users: User[] = [];
+  id: any;
 
   subscription!: Subscription;
 
-    constructor(private apiService: ApiService, private router: Router,  private route: ActivatedRoute,) { }
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
-    ngOnInit(): void {
+  ngOnInit(): void {
+    this.userId = this.route.snapshot.params['usersId'];
+    this.subscription = this.apiService.findPost(this.userId).subscribe((posts: Post[]) => {
+      this.posts = posts;
+    });
 
-      this.userId = this.route.snapshot.params['usersId'];
+    this.apiService.getUsers().subscribe((users: User[]) => {
+      this.users = users;
+    });
+  }
 
-     this.subscription = this.apiService.findPost(this.userId).subscribe((Posts: any)=>{
-        this.posts = Posts
-      });
-    }
+  list(): void {
+    this.router.navigate(['/']);
+  }
 
-    list(){
-      this.router.navigate(['/']);
-    }
-
-    ngOnDestroy() {
-      this.subscription.unsubscribe();
-    }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }
